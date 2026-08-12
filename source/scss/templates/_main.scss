@@ -710,8 +710,18 @@
 
   .project-img-container {
     position: relative;
+  height: 320px;
     overflow: hidden;
+  .gallery-popup {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
     img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
         transform: perspective(1px) scale3d(1.1, 1.1, 1);
         transition: all 400ms;
     }
@@ -1163,6 +1173,24 @@ img.testimonial-thumb {
   position: relative;
 }
 
+.latest-post .latest-post-media {
+  height: 360px;
+  overflow: hidden;
+}
+
+.latest-post .latest-post-media .latest-post-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.latest-post .latest-post-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 .latest-post .image-angle:before {
   border-bottom: 20px solid #f9f9f9;
 }
@@ -1319,6 +1347,31 @@ img.testimonial-thumb {
 
 .footer-menu ul li a:hover {
   color: #fff;
+}
+
+@include tablet {
+  .copyright {
+    text-align: center;
+  }
+
+  .copyright .row {
+    row-gap: 12px;
+  }
+
+  .copyright-info,
+  .footer-menu {
+    text-align: center !important;
+  }
+
+  .footer-menu ul {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .footer-menu ul li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 #back-to-top {

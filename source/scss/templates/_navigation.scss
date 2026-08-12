@@ -188,6 +188,24 @@ ul.navbar-nav>li.active>a {
   height: auto;
 }
 
+@include tablet {
+  .top-bar {
+    padding: 2px 0;
+  }
+
+  .header-one .logo-area {
+    padding: 10px 0;
+  }
+
+  .header-two {
+    padding: 6px 0;
+  }
+
+  ul.top-info-box li {
+    margin-top: 6px;
+  }
+}
+
 /* header right */
 
 .header-right {

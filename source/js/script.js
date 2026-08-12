@@ -170,6 +170,24 @@ jQuery(function ($) {
 
 
 		// Shuffle js filter and masonry
+		function randomizeProjectCards() {
+			var projectGrid = document.querySelector('.shuffle-wrapper');
+			if (!projectGrid) {
+				return;
+			}
+			var projectItems = Array.prototype.slice.call(projectGrid.querySelectorAll('.shuffle-item'));
+			for (var index = projectItems.length - 1; index > 0; index--) {
+				var randomIndex = Math.floor(Math.random() * (index + 1));
+				var temporaryItem = projectItems[index];
+				projectItems[index] = projectItems[randomIndex];
+				projectItems[randomIndex] = temporaryItem;
+			}
+			projectItems.slice(3).forEach(function (item) {
+				item.parentNode.removeChild(item);
+			});
+		}
+		randomizeProjectCards();
+
 		function projectShuffle() {
 			if ($('.shuffle-wrapper').length !== 0) {
 				var Shuffle = window.Shuffle;
