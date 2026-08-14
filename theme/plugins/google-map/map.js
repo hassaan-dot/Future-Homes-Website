@@ -2,11 +2,13 @@ window.marker = null;
 
 function initialize() {
   var map;
-  var latitude = $('#map').attr('data-latitude');
-  var longitude = $('#map').attr('data-longitude');
-  var mapMarker = $('#map').attr('data-marker');
-  var mapMarkerName = $('#map').attr('data-marker-name');
-  var nottingham = new google.maps.LatLng(latitude, longitude);
+  var mapEl = document.getElementById('map');
+  var latitude = $(mapEl).attr('data-latitude');
+  var longitude = $(mapEl).attr('data-longitude');
+  var mapMarker = $(mapEl).attr('data-marker');
+  var mapMarkerName = $(mapEl).attr('data-marker-name');
+  var addressesJson = $(mapEl).attr('data-addresses');
+  var nottingham = latitude && longitude ? new google.maps.LatLng(latitude, longitude) : new google.maps.LatLng(31.5204, 74.3587);
   var style = [{
       "featureType": "administrative.locality",
       "elementType": "all",
@@ -246,14 +248,57 @@ function initialize() {
   });
   map.mapTypes.set('grey', mapType);
   map.setMapTypeId('grey');
-  var marker_image = mapMarker;
-  var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(46, 40));
-  marker = new google.maps.Marker({
-    position: nottingham,
-    map: map,
-    icon: pinIcon,
-    title: mapMarkerName
-  })
+  var geocoder = new google.maps.Geocoder();
+  // If data-addresses provided, geocode each and add colored symbol markers
+  if (addressesJson) {
+    var addresses = [];
+    try {
+      addresses = JSON.parse(addressesJson);
+    } catch (e) {
+      // ignore parse error
+      addresses = [];
+    }
+    var bounds = new google.maps.LatLngBounds();
+    addresses.forEach(function (item, idx) {
+      (function (addrItem) {
+        geocoder.geocode({ 'address': addrItem.address }, function (results, status) {
+          if (status === google.maps.GeocoderStatus.OK && results[0]) {
+            var loc = results[0].geometry.location;
+            bounds.extend(loc);
+            var color = addrItem.color || '#FF0000';
+            var marker = new google.maps.Marker({
+              map: map,
+              position: loc,
+              title: addrItem.title || addrItem.address,
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 8,
+                fillColor: color,
+                fillOpacity: 1,
+                strokeWeight: 2,
+                strokeColor: '#fff'
+              }
+            });
+            var infow = new google.maps.InfoWindow({ content: '<strong>' + (addrItem.title || '') + '</strong><br>' + addrItem.address });
+            marker.addListener('click', function () { infow.open(map, marker); });
+            // fit when last geocode completes
+            if (idx === addresses.length - 1) {
+              map.fitBounds(bounds);
+            }
+          }
+        });
+      })(item);
+    });
+  } else {
+    var marker_image = mapMarker;
+    var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(46, 40));
+    marker = new google.maps.Marker({
+      position: nottingham,
+      map: map,
+      icon: pinIcon,
+      title: mapMarkerName
+    });
+  }
 }
 var map = document.getElementById('map');
 if (map != null) {

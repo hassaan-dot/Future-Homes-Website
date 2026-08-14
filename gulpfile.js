@@ -15,7 +15,7 @@ const comments = require("gulp-header-comment");
 var path = {
   src: {
     // source paths
-    html: "source/*.html",
+    html: ["source/*.html", "source/**/*.html"],
     htminc: "source/partials/**/*",
     incdir: "source/partials/",
     plugins: "source/plugins/**/*",
@@ -35,7 +35,7 @@ var path = {
 // HTML
 gulp.task("html", function () {
   return gulp
-    .src(path.src.html)
+    .src(path.src.html, { base: "source" })
     .pipe(
       fileinclude({
         basepath: path.src.incdir,

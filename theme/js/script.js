@@ -284,6 +284,29 @@ jQuery(function ($) {
 		}
 		mediaPopup();
 
+		// set active nav item based on current URL
+		function setActiveNavItem() {
+			var currentPath = window.location.pathname.split('/').pop();
+			if (!currentPath) currentPath = 'index.html';
+			// clear existing active classes
+			$('.nav.navbar-nav li').removeClass('active');
+			// find matching link
+			$('.nav.navbar-nav a').each(function () {
+				var href = $(this).attr('href');
+				if (!href) return;
+				try {
+					var linkPath = new URL(href, window.location.origin).pathname.split('/').pop();
+				} catch (e) {
+					var linkPath = href.split('/').pop();
+				}
+				if (linkPath === currentPath) {
+					$(this).closest('li').addClass('active');
+					$(this).closest('.dropdown-menu').closest('li.dropdown').addClass('active');
+				}
+			});
+		}
+		setActiveNavItem();
+
 	});
 
 
