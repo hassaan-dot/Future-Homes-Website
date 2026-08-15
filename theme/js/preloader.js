@@ -15,12 +15,14 @@
   'use strict';
 
   var lottieInstance = null;
-  var minDisplayDuration = 400;
+  var minDisplayDuration = 2800;
   var maxDisplayDuration = 8000;
   var startTime = Date.now();
   var isPreloaderActive = true;
   var hideTimer = null;
   var maxTimer = null;
+  var pageReady = false;
+  var lottieReady = false;
 
   function getPreloader() {
     return document.getElementById('page-preloader');
@@ -40,6 +42,7 @@
   function initLottieLoader() {
     var container = document.getElementById('lottie-construction-container');
     if (!container || !window.lottie) {
+      lottieReady = true;
       return;
     }
 
@@ -47,21 +50,32 @@
       container: container,
       renderer: 'svg',
       loop: true,
-      autoplay: true
+      autoplay: true,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid meet',
+        progressiveLoad: false
+      }
     };
 
-    // Bundled animation data keeps localhost and Vercel identical
-    // (the JSON file was previously omitted from the production image copy).
     if (window.FH_CONSTRUCTION_LOTTIE) {
-      options.animationData = window.FH_CONSTRUCTION_LOTTIE;
+      options.animationData = JSON.parse(JSON.stringify(window.FH_CONSTRUCTION_LOTTIE));
     } else {
       options.path = '/images/construction-loader.json';
     }
 
     try {
       lottieInstance = window.lottie.loadAnimation(options);
+      lottieInstance.addEventListener('DOMLoaded', function () {
+        lottieReady = true;
+        maybeHidePreloader();
+      });
+      lottieInstance.addEventListener('data_failed', function () {
+        lottieReady = true;
+        maybeHidePreloader();
+      });
     } catch (err) {
       console.warn('Lottie animation fallback:', err);
+      lottieReady = true;
     }
   }
 
@@ -69,6 +83,12 @@
     var progressBar = document.getElementById('preloader-progress-bar');
     if (progressBar) {
       progressBar.style.width = Math.min(100, Math.max(0, percent)) + '%';
+    }
+  }
+
+  function maybeHidePreloader() {
+    if (pageReady && lottieReady) {
+      hidePreloader();
     }
   }
 
@@ -125,10 +145,13 @@
     preloader.setAttribute('aria-busy', 'true');
     preloader.removeAttribute('aria-hidden');
     isPreloaderActive = true;
+    pageReady = false;
     startTime = Date.now();
     document.body.classList.add('preloader-active-overflow');
 
-    if (lottieInstance && typeof lottieInstance.play === 'function') {
+    if (lottieInstance && typeof lottieInstance.goToAndPlay === 'function') {
+      lottieInstance.goToAndPlay(0, true);
+    } else if (lottieInstance && typeof lottieInstance.play === 'function') {
       lottieInstance.play();
     }
 
@@ -143,7 +166,8 @@
     var images = document.querySelectorAll('img');
     var totalImages = images.length;
     if (totalImages === 0) {
-      hidePreloader();
+      pageReady = true;
+      maybeHidePreloader();
       return;
     }
 
@@ -153,7 +177,8 @@
       var pct = Math.round((loadedCount / totalImages) * 90);
       setProgress(pct);
       if (loadedCount >= totalImages) {
-        hidePreloader();
+        pageReady = true;
+        maybeHidePreloader();
       }
     }
 
@@ -239,7 +264,11 @@
     if (maxTimer) {
       clearTimeout(maxTimer);
     }
-    maxTimer = setTimeout(hidePreloader, maxDisplayDuration);
+    maxTimer = setTimeout(function () {
+      lottieReady = true;
+      pageReady = true;
+      hidePreloader();
+    }, maxDisplayDuration);
   }
 
   if (document.readyState === 'loading') {
@@ -249,11 +278,14 @@
   }
 
   window.addEventListener('load', function () {
-    hidePreloader();
+    pageReady = true;
+    maybeHidePreloader();
   });
 
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
+      lottieReady = true;
+      pageReady = true;
       hidePreloader();
     }
   });
