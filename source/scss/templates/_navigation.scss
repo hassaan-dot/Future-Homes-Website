@@ -290,6 +290,9 @@ ul.top-info-box li.header-get-a-quote {
 
 ul.top-info-box li.last {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
+  @include mobile {
+    display: none !important;
+  }
 }
 
 ul.top-info-box li .info-box span.info-icon {

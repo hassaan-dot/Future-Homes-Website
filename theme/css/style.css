@@ -854,6 +854,11 @@ ul.top-info-box li.header-get-a-quote {
 ul.top-info-box li.last {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 575px) {
+  ul.top-info-box li.last {
+    display: none !important;
+  }
+}
 
 ul.top-info-box li .info-box span.info-icon {
   font-size: 20px;
