@@ -2605,9 +2605,13 @@ img.testimonial-thumb {
   height: auto;
 }
 
+.footer-services-list {
+  margin-bottom: 28px;
+}
+
 .footer-service-areas {
-  margin: 28px 0 0;
-  padding-top: 22px;
+  margin: 8px 0 0;
+  padding-top: 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .footer-service-areas .widget-title {
@@ -2629,9 +2633,12 @@ img.testimonial-thumb {
 }
 
 @media (max-width: 767px) {
+  .footer-services-list {
+    margin-bottom: 22px;
+  }
   .footer-service-areas {
-    margin-top: 22px;
-    padding-top: 18px;
+    margin-top: 8px;
+    padding-top: 22px;
   }
   .footer-service-areas .widget-title {
     margin-bottom: 12px;
@@ -2646,9 +2653,12 @@ img.testimonial-thumb {
   .footer-main {
     padding: 48px 0 36px;
   }
+  .footer-services-list {
+    margin-bottom: 20px;
+  }
   .footer-service-areas {
-    margin-top: 20px;
-    padding-top: 16px;
+    margin-top: 8px;
+    padding-top: 20px;
   }
   .footer-service-areas .widget-title {
     margin-bottom: 10px;
