@@ -61,6 +61,20 @@ FACEBOOK: https://www.facebook.com/themefisher
 
 </head>
 <body>
+  <!-- Global Lottie Construction Preloader -->
+<div id="page-preloader" class="page-preloader">
+  <div class="preloader-inner">
+    <div id="lottie-construction-container" class="lottie-preloader-box"></div>
+    <div class="preloader-branding">
+      <div class="preloader-logo-title">FUTURE HOMES</div>
+      <div class="preloader-progress-track">
+        <div id="preloader-progress-bar" class="preloader-progress-bar"></div>
+      </div>
+      <div class="preloader-status-text" id="preloader-status-text">Building Excellence...</div>
+    </div>
+  </div>
+</div>
+
   <div class="body-inner">
 
     <div id="top-bar" class="top-bar d-none d-md-block">
@@ -106,7 +120,7 @@ FACEBOOK: https://www.facebook.com/themefisher
     <div class="container">
       <div class="logo-area">
           <div class="row align-items-center">
-            <div class="logo col-lg-3 text-center text-lg-left mb-3 mb-md-5 mb-lg-0">
+            <div class="logo col-lg-3 text-center text-lg-left mb-2 mb-lg-0">
                 <a class="d-block" href="/index.html">
                   <img loading="lazy" src="/images/logo.png" alt="Future Homes">
                 </a>
@@ -130,7 +144,7 @@ FACEBOOK: https://www.facebook.com/themefisher
                       </div>
                     </div>
                   </li>
-                  <li class="last">
+                  <li class="last d-none d-sm-block">
                     <div class="info-box">
                       <div class="info-box-content">
                           <p class="info-box-title">Available</p>
@@ -160,12 +174,7 @@ FACEBOOK: https://www.facebook.com/themefisher
                 
                 <div id="navbar-collapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav mr-auto">
-                      <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-angle-down"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="/index.html">Home</a></li>
-                          </ul>
-                      </li>
+                      <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
 
                       <li class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Company <i class="fa fa-angle-down"></i></a>
@@ -190,7 +199,6 @@ FACEBOOK: https://www.facebook.com/themefisher
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="/services/grey-structure">Grey Structure</a></li>
                             <li><a href="/services/finishing">Finishing</a></li>
-                            <li><a href="/services/turkish-construction">Turkish Construction</a></li>
                           </ul>
                       </li>
               
@@ -229,20 +237,13 @@ FACEBOOK: https://www.facebook.com/themefisher
   <!--/ Navigation end -->
 </header>
 <!--/ Header end -->
-<div id="banner-area" class="banner-area" style="background-image:url(images/banner/banner1.jpg)">
+<div id="banner-area" class="banner-area" style="background-image:url(/images/banner/banner1.jpg)">
   <div class="banner-text">
     <div class="container">
         <div class="row">
           <div class="col-lg-12">
               <div class="banner-heading">
                 <h1 class="banner-title">Finishing Works</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Services</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Finishing</li>
-                    </ol>
-                </nav>
               </div>
           </div><!-- Col end -->
         </div><!-- Row end -->
@@ -261,14 +262,13 @@ FACEBOOK: https://www.facebook.com/themefisher
             <ul class="nav service-menu">
               <li><a href="/services/grey-structure">Grey Structure</a></li>
               <li class="active"><a href="/services/finishing">Finishing Works</a></li>
-              <li><a href="/services/turkish-construction">Turkish Construction</a></li>
             </ul>
           </div><!-- Widget end -->
 
           <div class="widget">
             <div class="quote-item quote-border">
               <div class="quote-text-border">
-                "The attention to detail in tiling, woodwork, and paint finishing transformed our house into a luxury villa. Outstanding team!"
+                "The finishing quality by Future Homes is second to none. Exceptional tile work, paint finish, and wooden doors."
               </div>
               <div class="quote-item-footer">
                 <div class="quote-item-info">
@@ -281,9 +281,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 
           <div class="widget">
             <div class="ts-service-box-bg text-center p-4" style="background:#23282d; color:#fff; border-radius:4px;">
-              <h4 style="color:#ffb600;" class="mb-3">Get Finishing Estimate</h4>
-              <p style="font-size:14px;">Select your preferred materials and get an itemized finishing budget.</p>
-              <a href="/contact.html" class="btn btn-primary mt-2">Request Quote</a>
+              <h4 style="color:#ffb600;" class="mb-3">Need Finishing Guidance?</h4>
+              <p style="font-size:14px;">Consult our interior design specialists for custom finish packages.</p>
+              <a href="/contact.html" class="btn btn-primary mt-2">Contact Us</a>
             </div>
           </div>
 
@@ -292,6 +292,10 @@ FACEBOOK: https://www.facebook.com/themefisher
 
       <div class="col-xl-9 col-lg-8">
         <div class="content-inner-page">
+
+          <div class="service-top-img mb-4">
+            <img loading="lazy" src="/images/services/finishing work.jpg" class="img-fluid w-100 rounded" alt="Finishing Works Construction" style="max-height: 420px; object-fit: cover;">
+          </div>
 
           <h2 class="column-title mrt-0">Complete Interior & Exterior Finishing Services</h2>
 
@@ -357,10 +361,19 @@ FACEBOOK: https://www.facebook.com/themefisher
 
           <div id="page-slider" class="page-slider">
             <div class="item">
-              <img loading="lazy" class="img-fluid" src="/images/projects/project3.jpg" alt="Interior Finishing" />
+              <img loading="lazy" class="img-fluid w-100 rounded" src="/images/projects/interir 1.jpeg" alt="Luxury Interior Tiling & Chandelier Ceiling" style="max-height: 480px; object-fit: cover;" />
             </div>
             <div class="item">
-              <img loading="lazy" class="img-fluid" src="/images/projects/project4.jpg" alt="Luxury Bathroom & Tile Work" />
+              <img loading="lazy" class="img-fluid w-100 rounded" src="/images/projects/interior 2.jpeg" alt="Marble Flooring & Custom Woodwork Finish" style="max-height: 480px; object-fit: cover;" />
+            </div>
+            <div class="item">
+              <img loading="lazy" class="img-fluid w-100 rounded" src="/images/services/finishing work.jpg" alt="Plastering & Hand-crafted Wall Finish" style="max-height: 480px; object-fit: cover;" />
+            </div>
+            <div class="item">
+              <img loading="lazy" class="img-fluid w-100 rounded" src="/images/projects/5 marla 2.jpeg" alt="Complete Modern Exterior Facade Finish" style="max-height: 480px; object-fit: cover;" />
+            </div>
+            <div class="item">
+              <img loading="lazy" class="img-fluid w-100 rounded" src="/images/projects/10 marla 1.jpeg" alt="Night Elevation & Architectural Lighting Finish" style="max-height: 480px; object-fit: cover;" />
             </div>
           </div><!-- Page slider end -->
 
@@ -490,7 +503,6 @@ FACEBOOK: https://www.facebook.com/themefisher
             <ul class="list-arrow">
               <li><a href="/services/grey-structure">Grey Structure</a></li>
               <li><a href="/services/finishing">Finishing Works</a></li>
-              <li><a href="/services/turkish-construction">Turkish Construction</a></li>
             </ul>
           </div><!-- Col end -->
         </div><!-- Row end -->
@@ -551,6 +563,10 @@ FACEBOOK: https://www.facebook.com/themefisher
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU" defer></script>
   <!-- Google Map Plugin-->
   <script src="/plugins/google-map/map.js" defer></script>
+
+  <!-- Lottie Animation Player & Preloader -->
+  <script src="/plugins/lottie/lottie.min.js"></script>
+  <script src="/js/preloader.js"></script>
 
   <!-- Template custom -->
   <script src="/js/script.js"></script>
