@@ -1,31 +1,51 @@
 /**
  * Future Homes - Global Construction Lottie Preloader Manager
+ * Full-screen overlay during first load and internal page navigation.
+ * Must never remain in the header or document flow after content is ready.
  */
 
 (function () {
   'use strict';
 
   var lottieInstance = null;
-  var minDisplayDuration = 400; // Minimum display time for smooth visual experience
+  var minDisplayDuration = 400;
+  var maxDisplayDuration = 8000;
   var startTime = Date.now();
   var isPreloaderActive = true;
+  var hideTimer = null;
+  var maxTimer = null;
+
+  function getPreloader() {
+    return document.getElementById('page-preloader');
+  }
+
+  function attachToBody(preloader) {
+    if (!preloader || !document.body) {
+      return;
+    }
+    if (preloader.parentElement !== document.body) {
+      document.body.appendChild(preloader);
+    } else if (document.body.lastElementChild !== preloader) {
+      document.body.appendChild(preloader);
+    }
+  }
 
   function initLottieLoader() {
     var container = document.getElementById('lottie-construction-container');
-    if (!container) return;
+    if (!container || !window.lottie) {
+      return;
+    }
 
-    if (window.lottie) {
-      try {
-        lottieInstance = window.lottie.loadAnimation({
-          container: container,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/images/construction-loader.json'
-        });
-      } catch (err) {
-        console.warn('Lottie animation fallback:', err);
-      }
+    try {
+      lottieInstance = window.lottie.loadAnimation({
+        container: container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/images/construction-loader.json'
+      });
+    } catch (err) {
+      console.warn('Lottie animation fallback:', err);
     }
   }
 
@@ -37,25 +57,46 @@
   }
 
   function hidePreloader() {
-    var preloader = document.getElementById('page-preloader');
-    if (!preloader || !isPreloaderActive) return;
+    var preloader = getPreloader();
+    if (!preloader || !isPreloaderActive) {
+      if (preloader) {
+        preloader.classList.add('preloader-hidden');
+        preloader.setAttribute('aria-busy', 'false');
+        preloader.setAttribute('aria-hidden', 'true');
+      }
+      document.body.classList.remove('preloader-active-overflow');
+      return;
+    }
 
     setProgress(100);
 
     var elapsedTime = Date.now() - startTime;
     var remainingTime = Math.max(0, minDisplayDuration - elapsedTime);
 
-    setTimeout(function () {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+    }
+
+    hideTimer = setTimeout(function () {
       preloader.classList.add('preloader-hidden');
+      preloader.setAttribute('aria-busy', 'false');
+      preloader.setAttribute('aria-hidden', 'true');
       isPreloaderActive = false;
       document.body.classList.remove('preloader-active-overflow');
+      if (lottieInstance && typeof lottieInstance.pause === 'function') {
+        lottieInstance.pause();
+      }
     }, remainingTime);
   }
 
   function showPreloader(statusMessage) {
-    var preloader = document.getElementById('page-preloader');
+    var preloader = getPreloader();
     var statusEl = document.getElementById('preloader-status-text');
-    if (!preloader) return;
+    if (!preloader) {
+      return;
+    }
+
+    attachToBody(preloader);
 
     if (statusMessage && statusEl) {
       statusEl.textContent = statusMessage;
@@ -65,24 +106,23 @@
 
     setProgress(10);
     preloader.classList.remove('preloader-hidden');
+    preloader.setAttribute('aria-busy', 'true');
+    preloader.removeAttribute('aria-hidden');
     isPreloaderActive = true;
     startTime = Date.now();
     document.body.classList.add('preloader-active-overflow');
 
-    if (lottieInstance) {
+    if (lottieInstance && typeof lottieInstance.play === 'function') {
       lottieInstance.play();
     }
 
-    // Simulate progress animation during page transition
     setTimeout(function () { setProgress(45); }, 100);
     setTimeout(function () { setProgress(75); }, 250);
   }
 
-  // Expose global methods for data / API / dynamic component loading
   window.showPagePreloader = showPreloader;
   window.hidePagePreloader = hidePreloader;
 
-  // Track page image & component loading progress
   function monitorAssets() {
     var images = document.querySelectorAll('img');
     var totalImages = images.length;
@@ -112,55 +152,90 @@
     }
   }
 
-  // Handle internal link navigation transitions smoothly
+  function isInternalHref(href) {
+    var isHash = href.indexOf('#') === 0;
+    var isSpecial = href.indexOf('javascript:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('mailto:') === 0;
+    if (isHash || isSpecial) {
+      return false;
+    }
+    var isRelative = href.indexOf('/') === 0 || (href.indexOf('://') === -1 && href.indexOf('//') !== 0);
+    var isSameDomain = href.indexOf(window.location.hostname) !== -1;
+    return isRelative || isSameDomain;
+  }
+
   function setupNavigationInterception() {
     document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+        return;
+      }
+
       var target = e.target;
       while (target && target.tagName !== 'A') {
         target = target.parentElement;
       }
 
-      if (!target || !target.getAttribute('href')) return;
+      if (!target || !target.getAttribute('href')) {
+        return;
+      }
 
       var href = target.getAttribute('href');
       var isTargetBlank = target.getAttribute('target') === '_blank';
       var isDownload = target.hasAttribute('download');
-      var isHash = href.indexOf('#') === 0;
-      var isSpecial = href.indexOf('javascript:') === 0 || href.indexOf('tel:') === 0 || href.indexOf('mailto:') === 0;
+      var isDropdownToggle = target.getAttribute('data-toggle') === 'dropdown';
 
-      if (isTargetBlank || isDownload || isHash || isSpecial) return;
-
-      // Check if internal domain or relative path
-      var isRelative = href.indexOf('/') === 0 || (!href.includes('://') && !href.startsWith('//'));
-      var isSameDomain = href.includes(window.location.hostname);
-
-      if (isRelative || isSameDomain) {
-        var currentPath = window.location.pathname;
-        // If navigating to a different page
-        if (href !== currentPath && href !== currentPath + '#' && href !== window.location.href) {
-          e.preventDefault();
-          showPreloader('Constructing View...');
-          setTimeout(function () {
-            window.location.href = href;
-          }, 180);
-        }
+      if (isTargetBlank || isDownload || isDropdownToggle || !isInternalHref(href)) {
+        return;
       }
+
+      var destination;
+      try {
+        destination = new URL(href, window.location.href);
+      } catch (err) {
+        return;
+      }
+
+      if (destination.pathname === window.location.pathname && destination.hash) {
+        return;
+      }
+
+      if (destination.href === window.location.href) {
+        return;
+      }
+
+      e.preventDefault();
+      showPreloader('Building Excellence...');
+      setTimeout(function () {
+        window.location.href = destination.href;
+      }, 180);
     });
   }
 
-  // DOM ready initialization
-  document.addEventListener('DOMContentLoaded', function () {
+  function boot() {
+    var preloader = getPreloader();
+    if (preloader) {
+      attachToBody(preloader);
+      document.body.classList.add('preloader-active-overflow');
+    }
     initLottieLoader();
     monitorAssets();
     setupNavigationInterception();
-  });
 
-  // Window load safety trigger
+    if (maxTimer) {
+      clearTimeout(maxTimer);
+    }
+    maxTimer = setTimeout(hidePreloader, maxDisplayDuration);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
   window.addEventListener('load', function () {
     hidePreloader();
   });
 
-  // Handle back/forward cache restore
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
       hidePreloader();

@@ -285,25 +285,62 @@ jQuery(function ($) {
 		mediaPopup();
 
 		// set active nav item based on current URL
+		function normalizeNavPath(pathname) {
+			if (!pathname) {
+				return '/';
+			}
+			pathname = pathname.split('?')[0].split('#')[0];
+			pathname = pathname.replace(/\/+$/, '');
+			if (pathname === '' || pathname === '/') {
+				return '/';
+			}
+			pathname = pathname.replace(/\.html$/i, '');
+			if (pathname === '/index' || /\/index$/i.test(pathname)) {
+				return '/';
+			}
+			return pathname.toLowerCase();
+		}
+
 		function setActiveNavItem() {
-			var currentPath = window.location.pathname.split('/').pop();
-			if (!currentPath) currentPath = 'index.html';
-			// clear existing active classes
+			var currentPath = normalizeNavPath(window.location.pathname);
 			$('.nav.navbar-nav li').removeClass('active');
-			// find matching link
+
+			var bestLink = null;
+			var bestLength = -1;
+
 			$('.nav.navbar-nav a').each(function () {
 				var href = $(this).attr('href');
-				if (!href) return;
-				try {
-					var linkPath = new URL(href, window.location.origin).pathname.split('/').pop();
-				} catch (e) {
-					var linkPath = href.split('/').pop();
+				if (!href || href === '#' || href.indexOf('javascript:') === 0) {
+					return;
 				}
-				if (linkPath === currentPath) {
-					$(this).closest('li').addClass('active');
-					$(this).closest('.dropdown-menu').closest('li.dropdown').addClass('active');
+
+				var linkPath;
+				try {
+					linkPath = normalizeNavPath(new URL(href, window.location.href).pathname);
+				} catch (e) {
+					linkPath = normalizeNavPath(href);
+				}
+
+				if (linkPath === '/') {
+					if (currentPath === '/' && 1 > bestLength) {
+						bestLink = this;
+						bestLength = 1;
+					}
+					return;
+				}
+
+				if (currentPath === linkPath || currentPath.indexOf(linkPath + '/') === 0) {
+					if (linkPath.length > bestLength) {
+						bestLink = this;
+						bestLength = linkPath.length;
+					}
 				}
 			});
+
+			if (bestLink) {
+				$(bestLink).closest('li').addClass('active');
+				$(bestLink).closest('.dropdown-menu').closest('li.dropdown').addClass('active');
+			}
 		}
 		setActiveNavItem();
 
