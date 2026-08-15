@@ -1290,28 +1290,61 @@ img.testimonial-thumb {
   margin: 28px 0 0;
   padding-top: 22px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
 
-.footer-areas-label {
-  display: block;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: $font-secondary;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  margin-bottom: 6px;
+  .widget-title {
+    margin-bottom: 14px;
+  }
 }
 
 .footer-areas-place {
-  display: block;
+  display: flex;
+  align-items: center;
+  margin: 0;
   color: #999;
   font-size: 14px;
   line-height: 22px;
 
   i {
+    flex: 0 0 auto;
     color: $color-primary;
     margin-right: 8px;
+  }
+}
+
+@include tablet {
+  .footer-service-areas {
+    margin-top: 22px;
+    padding-top: 18px;
+
+    .widget-title {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+  }
+
+  .footer-areas-place {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}
+
+@include mobile {
+  .footer-main {
+    padding: 48px 0 36px;
+  }
+
+  .footer-service-areas {
+    margin-top: 20px;
+    padding-top: 16px;
+
+    .widget-title {
+      margin-bottom: 10px;
+    }
+  }
+
+  .footer-areas-place {
+    font-size: 13px;
+    flex-wrap: wrap;
   }
 }
 
@@ -2502,7 +2535,7 @@ label {
   max-width: 720px;
   margin: 0 auto;
   background: transparent;
-  padding: 0;
+  padding: 0 8px;
   box-shadow: none;
 
   h4 {
@@ -2514,7 +2547,8 @@ label {
   }
 
   p {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 560px;
     color: #cfcfcf;
     font-size: 16px;
     line-height: 28px;
@@ -2533,7 +2567,7 @@ label {
 
 @include desktop {
   .fh-service-areas {
-    padding: 72px 0;
+    padding: 64px 0;
   }
 
   .fh-service-area-card h4 {
@@ -2543,36 +2577,75 @@ label {
 }
 
 @include tablet {
+  .fh-service-areas {
+    padding: 44px 0 48px;
+
+    .section-title {
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .section-sub-title {
+      font-size: 24px;
+      line-height: 32px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+    }
+  }
+
+  .fh-service-area-icon {
+    font-size: 28px;
+  }
+
   .fh-service-area-card {
-    padding: 0;
+    padding: 0 4px;
+
+    h4 {
+      font-size: 20px;
+      line-height: 26px;
+      margin: 12px 0 10px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
+    }
   }
 }
 
 @include mobile {
   .fh-service-areas {
-    padding: 52px 0;
+    padding: 32px 0 36px;
+
+    .section-title {
+      font-size: 13px;
+      line-height: 20px;
+    }
 
     .section-sub-title {
-      margin-bottom: 20px;
+      font-size: 20px;
+      line-height: 26px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
     }
   }
 
   .fh-service-area-icon {
-    font-size: 34px;
+    font-size: 22px;
   }
 
   .fh-service-area-card {
     padding: 0;
 
     h4 {
-      font-size: 20px;
-      line-height: 28px;
-      margin: 14px 0 10px;
+      font-size: 18px;
+      line-height: 24px;
+      margin: 10px 0 8px;
     }
 
     p {
-      font-size: 15px;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 }
