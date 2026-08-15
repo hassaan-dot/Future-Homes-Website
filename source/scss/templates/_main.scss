@@ -646,6 +646,34 @@
   }
 }
 
+/* Service page intro copy (below the main heading)
+================================================== */
+.content-inner-page p.lead {
+  font-family: $font-primary;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  color: #555;
+  line-height: 26px;
+  letter-spacing: 0;
+  margin: 0 0 16px;
+}
+
+@include tablet {
+  .content-inner-page p.lead {
+    line-height: 24px;
+    margin-bottom: 14px;
+  }
+}
+
+@include mobile {
+  .content-inner-page p.lead {
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+}
+
 
 /* Service Classic */
 
