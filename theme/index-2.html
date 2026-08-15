@@ -89,12 +89,25 @@ FACEBOOK: https://www.facebook.com/themefisher
     width: 0 !important;
     overflow: hidden !important;
   }
+  #page-preloader .preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  #page-preloader .preloader-logo {
+    display: block;
+    width: var(--preloader-logo-width, 140px);
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 12px;
+  }
 </style>
 <div id="page-preloader" class="page-preloader" aria-live="polite" aria-busy="true" role="status">
   <div class="preloader-inner">
     <div id="lottie-construction-container" class="lottie-preloader-box"></div>
     <div class="preloader-branding">
-      <div class="preloader-logo-title">FUTURE HOMES</div>
+      <img class="preloader-logo" src="/images/footer-logo.png" alt="Future Homes">
       <div class="preloader-progress-track">
         <div id="preloader-progress-bar" class="preloader-progress-bar"></div>
       </div>
@@ -107,9 +120,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 
     <div id="top-bar" class="top-bar d-none d-md-block">
         <div class="container">
-          <div class="row">
+          <div class="row align-items-center">
               <div class="col-lg-9 col-md-8">
-                <ul class="top-info text-center text-md-left">
+                <ul class="top-info">
                     <li>
                       <i class="fas fa-map-marker-alt"></i>
                       <p class="info-text">
@@ -202,15 +215,6 @@ FACEBOOK: https://www.facebook.com/themefisher
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="services.html">Services All</a></li>
                             <li><a href="service-single.html">Services Single</a></li>
-                          </ul>
-                      </li>
-              
-                      <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News <i class="fa fa-angle-down"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="news-left-sidebar.html">News Left Sidebar</a></li>
-                            <li><a href="news-right-sidebar.html">News Right Sidebar</a></li>
-                            <li><a href="news-single.html">News Single</a></li>
                           </ul>
                       </li>
               
@@ -873,6 +877,10 @@ FACEBOOK: https://www.facebook.com/themefisher
               <li><a href="/services/grey-structure">Grey Structure</a></li>
               <li><a href="/services/finishing">Finishing Works</a></li>
             </ul>
+            <div class="footer-service-areas">
+              <span class="footer-areas-label">Service Areas</span>
+              <span class="footer-areas-place"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lahore, Pakistan</span>
+            </div>
           </div><!-- Col end -->
         </div><!-- Row end -->
       </div><!-- Container end -->

@@ -592,6 +592,7 @@ ul.top-info {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-start;
 }
 
 ul.top-info li {
@@ -600,28 +601,35 @@ ul.top-info li {
   display: inline-flex;
   align-items: center;
   margin-left: 0;
-  padding-right: 22px;
-  font-size: 13px;
+  padding-right: 16px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
+ul.top-info li:last-child {
+  padding-right: 0;
+}
+
 ul.top-info li i {
-  font-size: 14px;
+  font-size: 11px;
   position: relative;
   top: 0;
-  margin-right: 6px;
+  margin-right: 5px;
   color: #ffb600;
 }
 
 ul.top-info li p.info-text {
   margin: 0;
-  line-height: normal;
+  line-height: 1.2;
   display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 ul.top-info li p.info-text a {
   color: inherit;
   text-decoration: none;
+  font-size: 12px;
 }
 
 ul.top-info li p.info-text a:hover {
@@ -2593,6 +2601,36 @@ img.testimonial-thumb {
 /* Footer about us */
 .footer-logo {
   margin-bottom: 25px;
+  max-width: 100%;
+  height: auto;
+}
+
+.footer-service-areas {
+  margin: 28px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-areas-label {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+
+.footer-areas-place {
+  display: block;
+  color: #999;
+  font-size: 14px;
+  line-height: 22px;
+}
+.footer-areas-place i {
+  color: #ffb600;
+  margin-right: 8px;
 }
 
 /* Footer social */
@@ -3689,6 +3727,100 @@ label {
     height: 220px;
   }
 }
+/* Homepage service areas
+================================================== */
+.fh-service-areas {
+  padding: 90px 0;
+  background: #23282d;
+}
+.fh-service-areas .section-title {
+  color: #ffb600;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.fh-service-areas .section-sub-title {
+  position: relative;
+  padding-bottom: 18px;
+  margin-bottom: 28px;
+  color: #fff;
+}
+.fh-service-areas .section-sub-title:after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: #ffb600;
+  margin: 16px auto 0;
+}
+
+.fh-service-area-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+.fh-service-area-card h4 {
+  margin: 18px 0 14px;
+  font-size: 28px;
+  line-height: 36px;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.fh-service-area-card p {
+  margin: 0;
+  color: #cfcfcf;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.fh-service-area-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: #ffb600;
+  font-size: 42px;
+  line-height: 1;
+}
+
+@media (max-width: 991px) {
+  .fh-service-areas {
+    padding: 72px 0;
+  }
+  .fh-service-area-card h4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+@media (max-width: 767px) {
+  .fh-service-area-card {
+    padding: 0;
+  }
+}
+@media (max-width: 575px) {
+  .fh-service-areas {
+    padding: 52px 0;
+  }
+  .fh-service-areas .section-sub-title {
+    margin-bottom: 20px;
+  }
+  .fh-service-area-icon {
+    font-size: 34px;
+  }
+  .fh-service-area-card {
+    padding: 0;
+  }
+  .fh-service-area-card h4 {
+    font-size: 20px;
+    line-height: 28px;
+    margin: 14px 0 10px;
+  }
+  .fh-service-area-card p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
 /* ==========================================================================
    Global Lottie Preloader — full-screen overlay, never part of the header
    ========================================================================== */
@@ -3731,6 +3863,7 @@ body.preloader-active-overflow {
 }
 
 .preloader-inner {
+  --preloader-logo-width: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3761,14 +3894,12 @@ body.preloader-active-overflow {
   width: 100%;
 }
 
-.preloader-logo-title {
-  font-family: "Montserrat", sans-serif, "Montserrat", "Helvetica", sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+.preloader-logo {
+  display: block;
+  width: var(--preloader-logo-width, 180px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 12px;
 }
 
 .preloader-progress-track {
@@ -3808,9 +3939,8 @@ body.preloader-active-overflow {
     width: 140px;
     height: 140px;
   }
-  .preloader-logo-title {
-    font-size: 16px;
-    letter-spacing: 2px;
+  .preloader-inner {
+    --preloader-logo-width: 120px;
   }
 }
 /*# sourceMappingURL=style.css.map */

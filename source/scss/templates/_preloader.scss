@@ -38,6 +38,7 @@ body.preloader-active-overflow {
 }
 
 .preloader-inner {
+  --preloader-logo-width: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,14 +70,12 @@ body.preloader-active-overflow {
   width: 100%;
 }
 
-.preloader-logo-title {
-  font-family: $font-secondary, "Montserrat", "Helvetica", sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-bottom: 12px;
+.preloader-logo {
+  display: block;
+  width: var(--preloader-logo-width, 180px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 12px;
 }
 
 .preloader-progress-track {
@@ -117,8 +116,7 @@ body.preloader-active-overflow {
     height: 140px;
   }
 
-  .preloader-logo-title {
-    font-size: 16px;
-    letter-spacing: 2px;
+  .preloader-inner {
+    --preloader-logo-width: 120px;
   }
 }

@@ -89,12 +89,25 @@ FACEBOOK: https://www.facebook.com/themefisher
     width: 0 !important;
     overflow: hidden !important;
   }
+  #page-preloader .preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  #page-preloader .preloader-logo {
+    display: block;
+    width: var(--preloader-logo-width, 140px);
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 12px;
+  }
 </style>
 <div id="page-preloader" class="page-preloader" aria-live="polite" aria-busy="true" role="status">
   <div class="preloader-inner">
     <div id="lottie-construction-container" class="lottie-preloader-box"></div>
     <div class="preloader-branding">
-      <div class="preloader-logo-title">FUTURE HOMES</div>
+      <img class="preloader-logo" src="/images/footer-logo.png" alt="Future Homes">
       <div class="preloader-progress-track">
         <div id="preloader-progress-bar" class="preloader-progress-bar"></div>
       </div>
@@ -107,9 +120,9 @@ FACEBOOK: https://www.facebook.com/themefisher
 
     <div id="top-bar" class="top-bar d-none d-md-block">
         <div class="container">
-          <div class="row">
+          <div class="row align-items-center">
               <div class="col-lg-9 col-md-8">
-                <ul class="top-info text-center text-md-left">
+                <ul class="top-info">
                     <li>
                       <i class="fas fa-map-marker-alt"></i>
                       <p class="info-text">
@@ -240,15 +253,6 @@ FACEBOOK: https://www.facebook.com/themefisher
                           </ul>
                       </li>
               
-                      <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News <i class="fa fa-angle-down"></i></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="/news-left-sidebar.html">News Left Sidebar</a></li>
-                            <li><a href="/news-right-sidebar.html">News Right Sidebar</a></li>
-                            <li><a href="/news-single.html">News Single</a></li>
-                          </ul>
-                      </li>
-              
                       <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -277,7 +281,7 @@ FACEBOOK: https://www.facebook.com/themefisher
 <!--/ Header end -->
 
 <div class="banner-carousel banner-carousel-1 mb-0">
-  <div class="banner-carousel-item" style="background-image:url(images/slider-main/bg1.jpg)">
+  <div class="banner-carousel-item" style="background-image:url(images/slider-main/bg3.jpg)">
     <div class="slider-content">
       <div class="container h-100">
         <div class="row align-items-center h-100">
@@ -311,7 +315,7 @@ FACEBOOK: https://www.facebook.com/themefisher
     </div>
   </div>
 
-  <div class="banner-carousel-item" style="background-image:url(images/slider-main/bg3.jpg)">
+  <div class="banner-carousel-item" style="background-image:url(images/slider-main/bg1.jpg)">
     <div class="slider-content text-right">
       <div class="container h-100">
         <div class="row align-items-center h-100">
@@ -663,6 +667,30 @@ FACEBOOK: https://www.facebook.com/themefisher
 </section>
 
 
+<section id="service-areas" class="fh-service-areas">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12">
+        <h2 class="section-title">Where We Build</h2>
+        <h3 class="section-sub-title">Service Areas</h3>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="fh-service-area-card text-center">
+          <span class="fh-service-area-icon" aria-hidden="true">
+            <i class="fas fa-map-marker-alt"></i>
+          </span>
+          <h4>Lahore, Pakistan</h4>
+          <p>Future Homes offers home construction services throughout Lahore, Pakistan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Recent Projects section temporarily hidden on homepage
      Restore by adding: include blocks/projects.htm
 -->
@@ -874,6 +902,10 @@ FACEBOOK: https://www.facebook.com/themefisher
               <li><a href="/services/grey-structure">Grey Structure</a></li>
               <li><a href="/services/finishing">Finishing Works</a></li>
             </ul>
+            <div class="footer-service-areas">
+              <span class="footer-areas-label">Service Areas</span>
+              <span class="footer-areas-place"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Lahore, Pakistan</span>
+            </div>
           </div><!-- Col end -->
         </div><!-- Row end -->
       </div><!-- Container end -->

@@ -1282,6 +1282,37 @@ img.testimonial-thumb {
 
 .footer-logo {
   margin-bottom: 25px;
+  max-width: 100%;
+  height: auto;
+}
+
+.footer-service-areas {
+  margin: 28px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-areas-label {
+  display: block;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: $font-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+
+.footer-areas-place {
+  display: block;
+  color: #999;
+  font-size: 14px;
+  line-height: 22px;
+
+  i {
+    color: $color-primary;
+    margin-right: 8px;
+  }
 }
 
 
@@ -2435,5 +2466,113 @@ label {
 
   .fh-service-card-image {
     height: 220px;
+  }
+}
+
+/* Homepage service areas
+================================================== */
+.fh-service-areas {
+  padding: 90px 0;
+  background: #23282d;
+
+  .section-title {
+    color: $color-primary;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .section-sub-title {
+    position: relative;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    color: #fff;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: $color-primary;
+      margin: 16px auto 0;
+    }
+  }
+}
+
+.fh-service-area-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+
+  h4 {
+    margin: 18px 0 14px;
+    font-size: 28px;
+    line-height: 36px;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    margin: 0;
+    color: #cfcfcf;
+    font-size: 16px;
+    line-height: 28px;
+  }
+}
+
+.fh-service-area-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: $color-primary;
+  font-size: 42px;
+  line-height: 1;
+}
+
+@include desktop {
+  .fh-service-areas {
+    padding: 72px 0;
+  }
+
+  .fh-service-area-card h4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+@include tablet {
+  .fh-service-area-card {
+    padding: 0;
+  }
+}
+
+@include mobile {
+  .fh-service-areas {
+    padding: 52px 0;
+
+    .section-sub-title {
+      margin-bottom: 20px;
+    }
+  }
+
+  .fh-service-area-icon {
+    font-size: 34px;
+  }
+
+  .fh-service-area-card {
+    padding: 0;
+
+    h4 {
+      font-size: 20px;
+      line-height: 28px;
+      margin: 14px 0 10px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 24px;
+    }
   }
 }
