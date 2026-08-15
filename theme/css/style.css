@@ -589,21 +589,27 @@ ul.top-info {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 ul.top-info li {
   position: relative;
-  line-height: 10px;
-  display: inline-block;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
   margin-left: 0;
-  padding-right: 15px;
+  padding-right: 22px;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 ul.top-info li i {
-  font-size: 18px;
+  font-size: 14px;
   position: relative;
-  top: 2px;
-  margin-right: 5px;
+  top: 0;
+  margin-right: 6px;
   color: #ffb600;
 }
 
@@ -611,7 +617,15 @@ ul.top-info li p.info-text {
   margin: 0;
   line-height: normal;
   display: inline-block;
-  flex-direction: column;
+}
+
+ul.top-info li p.info-text a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul.top-info li p.info-text a:hover {
+  color: #ffb600;
 }
 
 /* Top social */
@@ -2720,6 +2734,12 @@ img.testimonial-thumb {
   background-size: cover;
 }
 
+.banner-area.banner-area-plain {
+  min-height: 180px;
+  background-image: none !important;
+  background-color: #23282d;
+}
+
 .banner-title {
   color: #fff;
   text-transform: uppercase;
@@ -3547,6 +3567,102 @@ label {
   font-weight: 700;
 }
 
+/* Homepage construction stages grid
+================================================== */
+.fh-service-stages {
+  padding: 80px 0 90px;
+  background: #fff;
+}
+.fh-service-stages .section-title {
+  color: #ffb600;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.fh-service-stages .section-sub-title {
+  position: relative;
+  padding-bottom: 18px;
+  margin-bottom: 50px;
+}
+.fh-service-stages .section-sub-title:after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: #212121;
+  margin: 16px auto 0;
+}
+
+.fh-service-card {
+  display: block;
+  overflow: hidden;
+  background: #23282d;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  color: inherit;
+}
+.fh-service-card:hover, .fh-service-card:focus {
+  color: inherit;
+  text-decoration: none;
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
+}
+
+.fh-service-card-image {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+.fh-service-card-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 0.4s ease;
+}
+
+.fh-service-card:hover .fh-service-card-image img,
+.fh-service-card:focus .fh-service-card-image img {
+  transform: scale(1.1);
+}
+
+.fh-service-card-caption {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  background: #23282d;
+}
+
+.fh-service-card-accent {
+  flex: 0 0 8px;
+  align-self: stretch;
+  background: #ffb600;
+}
+
+.fh-service-card-caption h3 {
+  margin: 0;
+  padding: 16px 18px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: none;
+}
+
+@media (max-width: 767px) {
+  .fh-service-card-image {
+    height: 240px;
+  }
+}
+@media (max-width: 575px) {
+  .fh-service-stages {
+    padding: 50px 0 60px;
+  }
+  .fh-service-card-image {
+    height: 220px;
+  }
+}
 /* ==========================================================================
    Global Lottie Preloader — full-screen overlay, never part of the header
    ========================================================================== */
