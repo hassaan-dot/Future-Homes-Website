@@ -36,14 +36,23 @@
       return;
     }
 
+    var options = {
+      container: container,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true
+    };
+
+    // Bundled animation data keeps localhost and Vercel identical
+    // (the JSON file was previously omitted from the production image copy).
+    if (window.FH_CONSTRUCTION_LOTTIE) {
+      options.animationData = window.FH_CONSTRUCTION_LOTTIE;
+    } else {
+      options.path = '/images/construction-loader.json';
+    }
+
     try {
-      lottieInstance = window.lottie.loadAnimation({
-        container: container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: '/images/construction-loader.json'
-      });
+      lottieInstance = window.lottie.loadAnimation(options);
     } catch (err) {
       console.warn('Lottie animation fallback:', err);
     }

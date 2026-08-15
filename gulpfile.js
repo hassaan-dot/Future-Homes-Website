@@ -21,7 +21,7 @@ var path = {
     plugins: "source/plugins/**/*",
     js: "source/js/*.js",
     scss: "source/scss/**/*.scss",
-    images: "source/images/**/*.+(png|jpg|jpeg|gif|svg|webp|ico)",
+    images: "source/images/**/*.+(png|jpg|jpeg|gif|svg|webp|ico|json)",
     blur: "source/images/**/*.+(jpg|jpeg|webp)",
     fonts: "source/fonts/**/*.+(eot|ttf|woff|woff2|otf)",
     static: "source/static/**/*",
