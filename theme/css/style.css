@@ -36,6 +36,31 @@ p {
   font-size: 15px;
 }
 
+p.lead {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #555;
+  line-height: 28px;
+  letter-spacing: 0;
+  margin: 0 0 20px;
+}
+
+@media (max-width: 767px) {
+  p.lead {
+    font-size: 15px;
+    line-height: 26px;
+    margin-bottom: 18px;
+  }
+}
+@media (max-width: 575px) {
+  p.lead {
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+}
 h1,
 h2,
 h3,
@@ -2605,17 +2630,13 @@ img.testimonial-thumb {
   height: auto;
 }
 
-.footer-services-list {
-  margin-bottom: 28px;
+.footer-widget-stack {
+  display: block;
 }
 
 .footer-service-areas {
-  margin: 8px 0 0;
-  padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.footer-service-areas .widget-title {
-  margin-bottom: 14px;
+  margin-top: 48px;
+  padding-top: 0;
 }
 
 .footer-areas-place {
@@ -2633,16 +2654,8 @@ img.testimonial-thumb {
 }
 
 @media (max-width: 767px) {
-  .footer-services-list {
-    margin-bottom: 22px;
-  }
   .footer-service-areas {
-    margin-top: 8px;
-    padding-top: 22px;
-  }
-  .footer-service-areas .widget-title {
-    margin-bottom: 12px;
-    font-size: 15px;
+    margin-top: 40px;
   }
   .footer-areas-place {
     font-size: 13px;
@@ -2653,15 +2666,8 @@ img.testimonial-thumb {
   .footer-main {
     padding: 48px 0 36px;
   }
-  .footer-services-list {
-    margin-bottom: 20px;
-  }
   .footer-service-areas {
-    margin-top: 8px;
-    padding-top: 20px;
-  }
-  .footer-service-areas .widget-title {
-    margin-bottom: 10px;
+    margin-top: 36px;
   }
   .footer-areas-place {
     font-size: 13px;

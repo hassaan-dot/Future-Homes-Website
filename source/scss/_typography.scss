@@ -17,6 +17,33 @@ p {
   font-size: 15px;
 }
 
+p.lead {
+  font-family: $font-primary;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #555;
+  line-height: 28px;
+  letter-spacing: 0;
+  margin: 0 0 20px;
+}
+
+@include tablet {
+  p.lead {
+    font-size: 15px;
+    line-height: 26px;
+    margin-bottom: 18px;
+  }
+}
+
+@include mobile {
+  p.lead {
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+}
+
 h1,
 h2,
 h3,
