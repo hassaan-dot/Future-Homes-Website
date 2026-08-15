@@ -92,6 +92,20 @@
     }
   }
 
+  function revealFloatActions() {
+    var actions = document.getElementById('fh-float-actions');
+    if (actions) {
+      actions.classList.add('is-visible');
+    }
+  }
+
+  function hideFloatActions() {
+    var actions = document.getElementById('fh-float-actions');
+    if (actions) {
+      actions.classList.remove('is-visible');
+    }
+  }
+
   function hidePreloader() {
     var preloader = getPreloader();
     if (!preloader || !isPreloaderActive) {
@@ -101,6 +115,7 @@
         preloader.setAttribute('aria-hidden', 'true');
       }
       document.body.classList.remove('preloader-active-overflow');
+      revealFloatActions();
       return;
     }
 
@@ -122,6 +137,7 @@
       if (lottieInstance && typeof lottieInstance.pause === 'function') {
         lottieInstance.pause();
       }
+      revealFloatActions();
     }, remainingTime);
   }
 
@@ -133,6 +149,7 @@
     }
 
     attachToBody(preloader);
+    hideFloatActions();
 
     if (statusMessage && statusEl) {
       statusEl.textContent = statusMessage;
